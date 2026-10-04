@@ -1,0 +1,34 @@
+### GET all books
+GET http://localhost:8080/api/books
+
+### GET one book
+GET http://localhost:8080/api/books/1
+
+### GET by author
+GET http://localhost:8080/api/books?author=Joshua%20Bloch
+
+
+### CREATE
+
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Head First Java",
+  "author": "Kathy Sierra",
+  "year": 2022
+}
+
+### UPDATE
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Effective Java 3rd Edition",
+  "author": "Joshua Bloch",
+  "year": 2018
+}
+
+### DELETE
+DELETE http://localhost:8080/api/books/1
+
