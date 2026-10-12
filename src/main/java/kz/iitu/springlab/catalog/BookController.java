@@ -1,3 +1,4 @@
+
 package kz.iitu.springlab.catalog;
 
 import org.springframework.http.HttpStatus;
@@ -19,23 +20,18 @@ public class BookController {
     @GetMapping
     public List<Book> findAll(
             @RequestParam(required = false) String author) {
-
         return service.findAll(author);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> findById(@PathVariable long id) {
-
+    public Book findById(@PathVariable long id) {
         return service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 
     @PostMapping
     public ResponseEntity<Book> create(@RequestBody Book book) {
-
         Book created = service.create(book);
-
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(created);
@@ -47,7 +43,7 @@ public class BookController {
             @RequestBody Book book) {
 
         if (service.findById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new BookNotFoundException(id);
         }
 
         Book updated = service.create(
@@ -60,11 +56,10 @@ public class BookController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
 
-        if (service.delete(id)) {
-            return ResponseEntity.noContent().build();
+        if (!service.delete(id)) {
+            throw new BookNotFoundException(id);
         }
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 }
-
