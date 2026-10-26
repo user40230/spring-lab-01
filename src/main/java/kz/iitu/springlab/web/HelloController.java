@@ -1,16 +1,10 @@
 package kz.iitu.springlab.web;
 
-
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.web.bind.annotation.*;
 
-
-
 import java.time.LocalDateTime;
-
-
 
 @RestController
 
@@ -18,13 +12,9 @@ import java.time.LocalDateTime;
 
 public class HelloController {
 
-
-
     @Value("${app.owner:unknown}")
 
     private String owner;
-
-
 
     @GetMapping("/hello")
 
@@ -33,8 +23,6 @@ public class HelloController {
         return new Greeting("Hello, " + name + "!", owner, LocalDateTime.now());
 
     }
-
-
 
     @GetMapping("/info")
 
@@ -48,11 +36,7 @@ public class HelloController {
 
     }
 
-
-
     public record Greeting(String message, String owner, LocalDateTime timestamp) { }
-
-
 
     public record Info(String owner, String javaVersion, int cpuCores) { }
 

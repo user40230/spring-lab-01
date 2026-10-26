@@ -1,0 +1,53 @@
+### GET all books
+GET http://localhost:8080/api/books
+
+### GET one book
+GET http://localhost:8080/api/books/1
+
+### GET by author
+GET http://localhost:8080/api/books?author=Joshua%20Bloch
+
+
+### CREATE
+
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Head First Java",
+  "author": "Kathy Sierra",
+  "year": 2022
+}
+
+### UPDATE
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Effective Java 3rd Edition",
+  "author": "Joshua Bloch",
+  "year": 2018
+}
+
+### DELETE
+DELETE http://localhost:8080/api/books/1
+
+
+### Lab 6: page exception handler
+GET http://localhost:8080/books/999
+
+### Lab 6: API exception handler
+GET http://localhost:8080/api/books/999
+Accept: application/problem+json
+
+### Lab 8: first page (totalElements = 8 after a clean development start)
+GET http://localhost:8080/api/books?page=0&size=3
+
+### Lab 8: second page, descending year
+GET http://localhost:8080/api/books?page=1&size=3&sort=year,desc
+
+### Lab 8: genre filter
+GET http://localhost:8080/api/books?genre=SCIENCE&page=0&size=2
+
+### Lab 8: invalid sort property (observed HTTP 500)
+GET http://localhost:8080/api/books?sort=nosuchfield
